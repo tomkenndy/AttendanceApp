@@ -4,10 +4,10 @@
     "slug": "AttendanceApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/MKSU_Logo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/MKSU_Logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,12 +19,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/MKSU_Logo.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.cassolee.AttendanceApp"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/MKSU_Logo.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "faaca580-7640-4d13-a373-6e2b87ce725c"
+      }
     }
   }
 }
