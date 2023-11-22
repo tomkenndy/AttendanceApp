@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { signUpWithEmailAndPassword, saveUserDetails } from '../firebase';
 
-const Signup = () => {
+const SignupScreen = () => {
   const navigation = useNavigation();
 
   const [firstName, setFirstName] = useState('');
@@ -12,14 +13,39 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [userType, setUserType] = useState('');
 
-  const handleSignup = () => {
-    // Perform your signup logic here
-    // If signup is successful, you can navigate to the main app screen
-    navigation.navigate('Login');
+  const handleSignup = async () => {
+    // Check if any of the required fields are empty
+    if (!firstName || !lastName || !email || !password || !confirmPassword || !userType) {
+      alert('Please fill in all fields');
+      return;
+    }
+
+    // Check if the password and confirm password match
+    if (password !== confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
+    if (userType !== 'Student' && userType !== 'Teacher') {
+      alert('Invalid User Type');
+      return;
+    }
+
+    try {
+      // Use Firebase authentication to create a new user
+      const user = await signUpWithEmailAndPassword(email, password);
+
+      // Save user details in Firestore
+      saveUserDetails(user.uid, firstName, lastName, email, userType, null);
+
+      // Optionally, you can navigate to another screen here
+      navigation.navigate('Login');
+    } catch (error) {
+      alert(error.message);
+    }
   };
+
   const handleSignin = () => {
-    // Perform your signup logic here
-    // If signup is successful, you can navigate to the main app screen
+    // Navigate to the login screen
     navigation.navigate('Login');
   };
 
@@ -86,4 +112,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignupScreen;

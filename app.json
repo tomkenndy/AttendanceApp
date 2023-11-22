@@ -27,10 +27,6 @@
     "web": {
       "favicon": "./assets/MKSU_Logo.png"
     },
-    "extra": {
-      "eas": {
-        "projectId": "faaca580-7640-4d13-a373-6e2b87ce725c"
-      }
-    }
+   
   }
 }
