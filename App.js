@@ -12,6 +12,8 @@ import AccountScreen from './screens/Account';
 import LogoutScreen from './screens/Logout';
 import LoginScreen from './screens/Login';
 import SignupScreen from './screens/Signup';
+import SyncScreen from './screens/Sync';
+import UserProvider from './UserProvider';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -20,7 +22,7 @@ const HomeStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Home"
+        name="Home2"
         component={HomeScreen}
         options={{ headerShown: false }}
       />
@@ -28,7 +30,7 @@ const HomeStack = () => {
         name="Account"
         component={AccountScreen}
         options={{
-          headerTitle: '',
+          headerTitle: 'Account',
           headerTitleAlign: 'center',
           tabBarVisible: false,
          
@@ -40,10 +42,12 @@ const HomeStack = () => {
 
 export default function App() {
   return (
+    <UserProvider>
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Signup" component={SignupScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Sync" component={SyncScreen} options={{ headerShown: false }} />
         <Stack.Screen
           name="MainApp"
           component={MainAppStack}
@@ -51,6 +55,8 @@ export default function App() {
         />
       </Stack.Navigator>
     </NavigationContainer>
+    </UserProvider>
+
   );
 }
 
